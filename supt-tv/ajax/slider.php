@@ -35,7 +35,7 @@
 		    		<article class="slide" style="background-image: url(<?php echo $image ?>)">
 			    		<div class="slide-text">
 							<h2><?php echo $title ?></h2>
-							<p><?php echo $removeAnchor ?></p>
+							<?php echo $removeAnchor ?>
 			    		</div>
 		    		</article>
 

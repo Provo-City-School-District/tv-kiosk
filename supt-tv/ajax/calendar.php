@@ -1,6 +1,6 @@
 <?php
 	$htmlContent = file_get_contents("https://provo.mid.as/signage.pl?screen=7");
-	
+
 	$DOM = new DOMDocument();
 	$DOM->loadHTML($htmlContent);
 	
@@ -46,15 +46,17 @@
 		} else {
 				while( $eventCounter < $countEvents) {
 				?>
-					<h2>&#9632; <?php echo $aDataTableDetailHTML[$eventCounter]['Meeting']; ?></h2>
+					<h2><?php echo $aDataTableDetailHTML[$eventCounter]['Meeting']; ?></h2>
+					<aside>
 					<div class="meetingTime">
 						<h3>Time</h3>
-						<?php echo $aDataTableDetailHTML[$eventCounter]['Times']; ?>
+						<p><?php echo $aDataTableDetailHTML[$eventCounter]['Times']; ?></p>
 					</div>
 					<div class="meetingRoom">
 						<h3>Room</h3>
-						<?php echo $aDataTableDetailHTML[$eventCounter]['Room']; ?>
+						<p><?php echo $aDataTableDetailHTML[$eventCounter]['Room']; ?></p>
 					</div>
+					</aside>
 				<?php
 				$eventCounter++;
 			}

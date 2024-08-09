@@ -45,136 +45,111 @@ p {
 	margin: 10px 0 10px 0;
 }
 /*=================================================================================
+Heading Styles
+==================================================================================*/
+h1,h2,h3,h4 {
+	font-family:'Montserrat',sans-serif;
+	color: #21395a;
+	margin: 30px 0 10px 0;
+
+}
+h1 {
+	font-size: 7em;
+	margin: 40px 0;
+}
+h2 {
+	font-size: 6em;
+}
+h3 {
+	font-size: 4em;
+}
+
+/*=================================================================================
 Structure styles
 ==================================================================================*/
 body {
 	font-family: "Campton Light";
+	font-size: 100%;
 }
 #wrapper {
 	width: 100%;
 }
 #header {
 	background: linear-gradient(to bottom,#dce3e8,#f6f9fb 50%,#f6f9fb 55%,#dbe2e8);
-	height: 100px;
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 500;
-}
-#header img {
-	height: 90%;
-	margin-top: 10px;
-	margin-left: 20px;
-}
-#header h1 {
-	float: right;
+	height: 200px;
 }
 #header .time-frame {
 	position: absolute;
 	right: 50px;
-	top: 25px;
+	top: 50px;
 	text-align: right;
-	font-size: 26px;
+	font-size: 2.6em;
 }
-#time {
-	position: absolute;
-	right: 0;
+main {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 }
+
+/*=================================================================================
+News slider
+==================================================================================*/
 #news {
-	top: 100px;
-	width: 47%;
-	height: 80vh;
 	background-color: #f6f9fb;
-	padding: 0 15px 0 15px;
+	padding: 0 3%;
 	overflow: hidden;
 }
-.slick-slide {
-	overflow: hidden;
-} 
 .slick-slide img {
 	margin: 0 auto;
 	display: block;
-	max-width: 100%;
 }
 .slick-slide ul {
 	margin-bottom: 20px;
 }
 .slick-slide ul li {
-	margin: 0 15px 0 0;
+	margin: 10px 15px 10px 0;
 	display: inline-block;
-	
+	font-size: 2em;
+
 }
 .slide ul li img {
-    width: 10px;
-    display: inline;
-    
+	width: 15px;
+	margin-right: 5px;
+	display: inline;
 }
-.slick-slide h2 {
-	margin-top: 20px;
-	margin-bottom: 20px;
+.slide p {
+	font-size: 3em;
+	margin-bottom: 30px;
 }
-#read-more {
-	position: fixed;
-	bottom: 0;
-	width: 47%;
-	height: 7vh;
-	text-align: center;
-	font-size: 26px;
-	color: #21395a;
-}
-#sidebar {
-	position: fixed;
-	right: 0;
-	font-size: 26px;
-	width: 50%;
-	color: #21395a;
-	bottom: 0;
-	top: 100px;
-	z-index: 550;
-	padding-top: 30px;
-
-}
-#sidebar h1 {
-	position: absolute;
-	top: -75px;
-}
-#sidebar h2 {
-	margin-top: 20px
-}
-#sidebar .meetingTime {
-	width: 45%;
-	float: left;
-	margin: 20px 0 30px 40px;
-
-}
-#sidebar .meetingRoom {
-	width: 50%;
-	float: left;
-	margin: 20px 0 30px 0;
-	
-}
-#sidebar{
-	
-}
-#calendar {
-
+.slide-text {
+	max-height: 60vh;
 }
 
 /*=================================================================================
-Heading Styles
+Today's Events
 ==================================================================================*/
-h1,h2,h3,h4 {
-	font-family:'Montserrat',sans-serif;
-	color: #21395a;
-	
+#sidebar {
+	padding: 0 3%
 }
-h1 {
-	font-size: 40px;
+#sidebar aside {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	place-content: space-evenly;
+
 }
-h2 {
-	font-size: 34px;
+#sidebar aside p {
+	font-size: 3em;
 }
-
-
-
+/*=================================================================================
+footer
+==================================================================================*/
+.read-more {
+	background: linear-gradient(to bottom,#dce3e8,#f6f9fb 50%,#f6f9fb 55%,#dbe2e8);
+	position: fixed;
+	width: 50%;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	height: 80px;
+	font-size: 3em;
+	text-align: center;
+}
