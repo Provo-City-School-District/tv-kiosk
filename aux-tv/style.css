@@ -49,7 +49,7 @@ body {
 	font-family: "Campton Light";
 }
 #wrapper {
-	width: calc(100% - 1055px);
+	width: 36%;
 }
 #header {
 	background: linear-gradient(to bottom, #dfe6e2,#f6f9fb 50%,#f6f9fb 55%, #dfe6e2);
@@ -65,7 +65,7 @@ body {
 	background-color: #0d4834;
 	position: fixed;
 	right: 0;
-	width: 1025px;
+	width: 60%;
 	color: #dae1e7;
 	bottom: 94px;
 	top: 0;
@@ -92,14 +92,24 @@ h1,h2,h3,h4 {
 	color: #0d4834;
 }
 h1 {
-	font-size: 40px;
+	font-size: 4.5rem;
 }
 h2 {
-	font-size: 34px;
+	font-size: 4rem;
+}
+/*=================================================================================
+Logo
+==================================================================================*/
+#logo {
+	max-width: 80%;
+	margin: 20px auto;
+	display: block;
 }
 /*=================================================================================
 Slider Styles
 ==================================================================================*/
+/* hide news slider */
+#techNews {display: none;}
 #techNews .slide {
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -122,36 +132,48 @@ Slider Styles
 #techNews .slide h2 {
 	margin-bottom: 10px;
 }
+
 /*=================================================================================
 Directory Styles
 ==================================================================================*/
-#sidebar {display: flex;flex-wrap: wrap;padding: 25px 0 0 30px;}
+#sidebar {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	padding: 2%;
+
+}
 #sidebar .personalvCard {
-	width: 25%;
+	font-size: 1rem;
 }
 #sidebar .personalvCard img {
-	width: 50px;
+	width: 30%;
 	float: left;
-	margin-right: 10px;
+	margin-right: 1%;
 }
 #sidebar .name {
-	font-size: 26px;
+	font-size: 3rem;
 }
 #sidebar .title {
-	font-size: 16px;
+	font-size: 2rem;
 	margin-bottom: 5px;
 }
 #sidebar .schedule {
 	clear: both;
-	font-size: 12px;
+	font-size: 1.5rem;
 	margin-bottom: 10px;
+}
+#sidebar .rm {
+	font-size: 1.5rem;
+}
+#sidebar .currentGPS {
+	font-size: 1.5rem;
 }
 /*=================================================================================
 Calendar Styles
 ==================================================================================*/
 #calendar {
 	padding: 20px 0 0 20px;
-	font-size: 26px;
+	font-size: 2rem;
 }
 #calendar h2 {
 	margin-left: 5%;
@@ -189,34 +211,34 @@ Scrolling Marquee
  line-height: 95px;
 
 
- /*-moz-transform:translateX(100%); */
+ -moz-transform:translateX(100%);
  -webkit-transform:translateX(100%);
  transform:translateX(100%);
 
-/* -moz-animation: marquee 25s linear infinite; */
+-moz-animation: marquee 25s linear infinite;
  -webkit-animation: marquee 30s linear infinite;
  animation: marquee 30s linear infinite;
 
 }
 /* Move it (define the animation)*/
-/*
+
 @-moz-keyframes marquee {
  0%   { -moz-transform: translateX(100%); }
  100% { -moz-transform: translateX(-100%); }
 }
-*/
+
 @-webkit-keyframes marquee {
  0%   { -webkit-transform: translateX(100%); }
  100% { -webkit-transform: translateX(-100%); }
 }
 @keyframes marquee {
  0%   {
-/* -moz-transform: translateX(100%); */
+-moz-transform: translateX(100%);
  -webkit-transform: translateX(100%);
  transform: translateX(100%);
  }
  100% {
-/* -moz-transform: translateX(-100%); */
+-moz-transform: translateX(-100%);
  -webkit-transform: translateX(-100%);
  transform: translateX(-100%);
  }

@@ -60,12 +60,12 @@ while( $staffCounter < $countStaff) {
 
 				<ul>
 					<li class="name"><strong><?php echo $aDataTableDetailHTML[$staffCounter]['Technician']; ?></strong></li>
-				
+
 					<li class="title"><?php echo $aDataTableDetailHTML[$staffCounter]['Title']; ?></li>
 					<li class="schedule">Schedule: <?php echo $aDataTableDetailHTML[$staffCounter]["Today's Schedule"]; ?></li>
 						<img class="staff-member-photo" src="<?php
 							if(file_exists($imageFilename)) {
-								echo str_replace(' ', '', 'http://158.91.1.107/aux-tv/ajax/staff-images/'.$aDataTableDetailHTML[$staffCounter]['Technician'].'.jpg');
+								echo str_replace(' ', '', 'https://digitalsignage.provo.edu/aux-tv/ajax/staff-images/'.$aDataTableDetailHTML[$staffCounter]['Technician'].'.jpg');
 							} else {
 								echo 'http://158.91.1.107/aux-tv//ajax/staff-images/placeholder.jpg';
 							}
@@ -73,14 +73,14 @@ while( $staffCounter < $countStaff) {
 						alt="<?php echo $aDataTableDetailHTML[$staffCounter]['Technician']; ?>">
 					<li class="rm">Office: <?php echo $aDataTableDetailHTML[$staffCounter]['Room Number']; ?></li>
 					<!--
-						Chad requested this be hidden on 7-9-2020 until further notice. 
+						Chad requested this be hidden on 7-9-2020 until further notice.
 					<li class="currentGPS"><strong>Current Location: <br><?php echo $aDataTableDetailHTML[$staffCounter]['Current Location']; ?></strong></li>
 					<li class="vaultmessage"><?php if($aDataTableDetailHTML[$staffCounter]['Message']) {echo 'Note: '.$aDataTableDetailHTML[$staffCounter]['Message'];} ?></li>
 					-->
 					<!--
-						Chad/Eugene requested this be exposed but altered to only show in and out on 2-2-2021 
+						Chad/Eugene requested this be exposed but altered to only show in and out on 2-2-2021
 					-->
-					<?php 
+					<?php
 						if(strpos($aDataTableDetailHTML[$staffCounter]['Current Location'], 'Aux') !== false) {
 							$location_message = 'In the building';
 						} else {
@@ -89,7 +89,7 @@ while( $staffCounter < $countStaff) {
 					?>
 					<li class="currentGPS"><strong><br> <?php echo $location_message; ?></strong></li>
 					<li class="hidden"><strong>Current Location: <br> <?php echo $aDataTableDetailHTML[$staffCounter]['Current Location']; ?></strong></li>
-					
+
 				</ul>
 		</div> <?php
 		$staffCounter++;
