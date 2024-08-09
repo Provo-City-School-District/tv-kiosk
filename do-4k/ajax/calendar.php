@@ -1,5 +1,5 @@
 <?php
-	$htmlContent = file_get_contents("https://provo.mid.as/signage.pl?screen=7");
+	$htmlContent = file_get_contents("http://provo.mid.as/signage.pl?screen=7");
 
 	$DOM = new DOMDocument();
 	$DOM->loadHTML($htmlContent);
