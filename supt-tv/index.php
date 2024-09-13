@@ -21,7 +21,11 @@
 		</header>
 		<main>
 			<section id="news">
+
 				<?php
+
+				error_reporting(E_ALL);
+				ini_set('display_errors', 1);
 
 				$rss = new DOMDocument();
 				$context = stream_context_create(array(
@@ -31,47 +35,71 @@
 					),
 				));
 				libxml_set_streams_context($context);
-				$rss->load('https://provo.edu/category/news/feed/');
+				libxml_use_internal_errors(true); // Suppress XML parsing errors
+
+				// Fetch the RSS feed
+				$rssContent = file_get_contents('https://provo.edu/category/news/feed/');
+
+				// Clean the RSS feed using Tidy
+				$tidy = new tidy();
+				$config = array(
+					'input-xml' => true,
+					'output-xml' => true,
+					'wrap' => 200
+				);
+				$tidy->parseString($rssContent, $config, 'utf8');
+				$tidy->cleanRepair();
+
+				// Load the cleaned RSS feed into DOMDocument
+				$rss->loadXML($tidy);
+
+				// Check for XML errors
+				if (libxml_get_errors()) {
+					foreach (libxml_get_errors() as $error) {
+						echo "XML Error: ", $error->message;
+					}
+					libxml_clear_errors();
+				}
+
 				$feed = array();
 				foreach ($rss->getElementsByTagName('item') as $node) {
 
 					$htmlStr = $node->getElementsByTagName('description')->item(0)->nodeValue;
-					// print_r($htmlStr);
 					$html = new DOMDocument();
+					libxml_use_internal_errors(true); // Suppress HTML parsing errors
 					@$html->loadHTML($htmlStr);
-					//get the first image tag from the description HTML
-					$img = $html->getElementsByTagName('img')->item(0)->getAttribute('src');
+					if (libxml_get_errors()) {
+						foreach (libxml_get_errors() as $error) {
+							echo "HTML Error: ", $error->message;
+						}
+						libxml_clear_errors();
+					}
+					$img = $html->getElementsByTagName('img')->item(0) ? $html->getElementsByTagName('img')->item(0)->getAttribute('src') : '';
 
 					$item = array(
-						'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-						'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
+						'title' => $node->getElementsByTagName('title')->item(0) ? $node->getElementsByTagName('title')->item(0)->nodeValue : '',
+						'desc' => $node->getElementsByTagName('description')->item(0) ? $node->getElementsByTagName('description')->item(0)->nodeValue : '',
 						'image' => $img,
-						'postcontent' => $node->getElementsByTagName('encoded')->item(0)->nodeValue,
-						'author' => $node->getElementsByTagName('creator')->item(0)->nodeValue,
-						'category' => $node->getElementsByTagName('category')->item(0)->nodeValue,
-						'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue
+						'postcontent' => $node->getElementsByTagName('encoded')->item(0) ? $node->getElementsByTagName('encoded')->item(0)->nodeValue : '',
+						'author' => $node->getElementsByTagName('creator')->item(0) ? $node->getElementsByTagName('creator')->item(0)->nodeValue : '',
+						'category' => $node->getElementsByTagName('category')->item(0) ? $node->getElementsByTagName('category')->item(0)->nodeValue : '',
+						'date' => $node->getElementsByTagName('pubDate')->item(0) ? $node->getElementsByTagName('pubDate')->item(0)->nodeValue : ''
 					);
-					// print_r($item);
 					array_push($feed, $item);
 				}
-				// print_r($feed);
-				$limit = 3;
-				for ($x = 0; $x < $limit; $x++) {
+
+				$limit = 3; // Limit to 3 items
+				for ($x = 0; $x < $limit && $x < count($feed); $x++) {
 					$title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
 					$image = $feed[$x]['image'];
 					$author = $feed[$x]['author'];
 					$postcontent = $feed[$x]['postcontent'];
 					$category = $feed[$x]['category'];
-					//$link = $feed[$x]['link'];
 					$description = $feed[$x]['desc'];
 					$removeImage = preg_replace("/<img[^>]+\>/i", "", $postcontent);
 					$removeImage = preg_replace("/<video[^>]+\>/i", "", $removeImage);
 					$removeAnchor = preg_replace('#<a.*?>.*?</a>#i', '', $removeImage);
-					//$result = explode(' </img>',$description);
 					$postdate = date('l F d, Y', strtotime($feed[$x]['date']));
-					//echo '<p><strong>'.$title.'</strong><br />';
-					//echo '<small><em>Posted on '.$date.'</em></small></p>';
-					//echo '<p>'.$description.'</p>';
 				?>
 
 					<article class="slide">
@@ -83,16 +111,13 @@
 							<li><img src="//globalassets.provo.edu/image/icons/hamburger-ltblue.svg" alt="" /><?php echo $category; ?></li>
 						</ul>
 						<div class="slide-text">
-
 							<?php echo $removeAnchor ?>
 						</div>
 					</article>
 
 				<?php
 				}
-
 				?>
-
 
 			</section>
 
